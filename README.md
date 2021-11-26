@@ -1,6 +1,6 @@
 # Forest of Tasks
 
-![](images/forest-of-tasks.gif)
+![](images/forest-of-tasks-demo.gif)
 
 ## Installation & starting
 
