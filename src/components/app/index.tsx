@@ -54,18 +54,6 @@ export const App = () => {
     save(newTasks);
   }, [tasks, setTasks]);
 
-  useEffect(() => {
-    setTasks(load());
-  }, []);
-
-  const handleChangeTreeNode = (task: TodoItem) => {
-    setCurrentNode(task);
-  };
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_ID + '-tab', tab);
-  }, [tab]);
-
   const isEmpty = Object.keys(tasks).length === 0;
   console.log(isEmpty, Object.keys(tasks).length, Object.keys(tasks));
 
@@ -76,6 +64,30 @@ export const App = () => {
       setCurrentNode(undefined);
     }
   };
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setCurrentNode(undefined);
+    }
+  }, [resetSelection]);
+
+  useEffect(() => {
+    setTasks(load());
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, []);
+
+  const handleChangeTreeNode = (task: TodoItem) => {
+    setCurrentNode(task);
+  };
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_ID + '-tab', tab);
+  }, [tab]);
+
 
   return (
     <TasksApi.Provider value={{add, remove, update}}>
