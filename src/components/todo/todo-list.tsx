@@ -27,7 +27,7 @@ export const TodoList = ({tasks, root}: {
 
       <div className="task-footer">
         <div>
-          {root?.name && <LinkToTask task={root} label="Edit"/>}
+          {root && <LinkToTask task={root} label="Edit"/>}
         </div>
         <div className="task-actions-buttons">
           <button className="btn secondary" onClick={() => remove(root?.id)}>
