@@ -10,7 +10,7 @@ import {Task, TaskMode} from '../todo/task';
 
 
 export const App = () => {
-  const [tab, setTab] = useState(    localStorage.getItem(LOCAL_STORAGE_ID + '-tab') || '0');
+  const [tab, setTab] = useState(localStorage.getItem(LOCAL_STORAGE_ID + '-tab') || '0');
   const [tasks, setTasks] = useState<ITodoListIndex>({});
   const [currentNode, setCurrentNode] = useState<TodoItem | undefined>(undefined);
 
@@ -58,13 +58,24 @@ export const App = () => {
     setTasks(load());
   }, []);
 
-  const handleChangeTreeNode = (task:TodoItem) => {
+  const handleChangeTreeNode = (task: TodoItem) => {
     setCurrentNode(task);
-  }
+  };
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_ID + '-tab', tab);
   }, [tab]);
+
+  const isEmpty = Object.keys(tasks).length === 0;
+  console.log(isEmpty, Object.keys(tasks).length, Object.keys(tasks));
+
+  const resetSelection = (e: React.MouseEvent<HTMLElement>) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (e.target?.classList?.contains('tree-container')) {
+      setCurrentNode(undefined);
+    }
+  };
 
   return (
     <TasksApi.Provider value={{add, remove, update}}>
@@ -78,14 +89,39 @@ export const App = () => {
           <Tab id="1" label="Tree">
             <h1>Forest of Tasks - Tree UI</h1>
             <div className="tree-layout">
-              <div className="tree-container">
+              <div className="tree-container" onClick={resetSelection}>
                 <TodoTree tasks={tasks}
                           onChange={handleChangeTreeNode}
                           selected={currentNode}
                 />
               </div>
               <div className="tree-form">
-                <Task task={currentNode} mode={TaskMode.block}/>
+                <Task task={currentNode} mode={TaskMode.block} />
+                {!currentNode && (
+                  <div style={{
+                    color: '#aaa',
+                    fontSize: '2em',
+                    placeSelf: 'center'
+                  }}>
+                    No task selected
+                  </div>)
+                }
+                <div className="task-actions-buttons"
+                     style={{
+                       placeItems: 'end',
+                       placeContent: 'end',
+                     }}
+                >
+                  <button className="btn secondary"
+                          onClick={() => remove(currentNode?.id)}
+                          disabled={isEmpty}
+                  >
+                    Delete task and all sub tasks
+                  </button>
+                  <button className="btn primary" onClick={() => add(currentNode?.id)}>
+                    Add Sub Task
+                  </button>
+                </div>
               </div>
             </div>
           </Tab>

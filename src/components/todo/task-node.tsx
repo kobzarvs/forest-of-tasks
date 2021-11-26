@@ -11,7 +11,7 @@ export const TaskNode = ({task, info, children, onChange, selected}: {
 }) => {
   return (
     <details className="task-node" id={task.id.toString()}>
-      <summary style={{display: info.total === 1 ? 'block' : 'list-item'}}
+      <summary style={{display: info.total === 1 ? 'block' : 'list-item', whiteSpace: 'nowrap', width: '100%'}}
                onClick={(e) => {
                  onChange(task);
                  selected !== task && e.preventDefault();
@@ -20,9 +20,9 @@ export const TaskNode = ({task, info, children, onChange, selected}: {
                data-completed={info.completed === info.total}
       >
         {task.name || '<Noname Task>'}
-        <div className="subtask-counter right">
+        <span className="subtask-counter" style={{marginLeft: '1em'}}>
           {info.completed}/{info.total}
-        </div>
+        </span>
       </summary>
 
       {children}

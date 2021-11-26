@@ -203,7 +203,12 @@ input[type=checkbox] {
 .tree-container {
     border: 1px solid gray;
     flex: 0 0 40%;
-    overflow: auto;
+    overflow: scroll;
+    min-height: 310px;
+}
+
+.task-tree {
+    white-space: nowrap;
 }
 
 .task-node > .task-tree {
@@ -239,9 +244,7 @@ details {
 .task-node summary[data-completed="true"]:after {
     content: "\02713";
     color: lightseagreen;
-    float: right;
     font-weight: bolder;
-    font-size: 1.2em;
 }
 
 
@@ -249,8 +252,13 @@ details {
     tree
 */
 .tree-form {
+    display: flex;
     flex: 1 0 auto;
     padding: 1em;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    align-items: stretch;
 }
 
 .tree-form summary {
@@ -270,6 +278,15 @@ details {
 
 .task-actions-buttons {
     display: flex;
-    gap: .5em;
+    gap: 0.5em;
     margin: 1em 0;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: nowrap;}
+
+
+.btn:disabled {
+    opacity: .5;
+    pointer-events: none;
 }

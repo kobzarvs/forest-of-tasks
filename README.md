@@ -1,5 +1,7 @@
 # Forest of Tasks
 
+![](images/forest-of-tasks.gif)
+
 ## Installation & starting
 
 ```shell
