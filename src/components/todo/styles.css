@@ -1,0 +1,260 @@
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.task-list .task {
+    border: 1px solid lightgray;
+    padding: .75em;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    box-shadow: 2px 2px 10px 2px #bbb;
+}
+
+.task {
+    flex: 1 0 auto;
+}
+
+.task summary {
+    padding: .5em;
+    user-select: none;
+    cursor: pointer;
+}
+
+.task header {
+    margin-bottom: -1em;
+    font-weight: bold;
+}
+
+.task-form {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-radius: .2em;
+    border-bottom: 1px dotted gray;
+}
+
+.task-form[data-mode="block"] {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 1em;
+}
+
+.task-form[data-mode="block"] button {
+    margin-top: 1em;
+    align-self: flex-end;
+}
+
+.task-name-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.task-description-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.task-completed-input {
+    display: block;
+    user-select: none;
+}
+
+.task .task-body {
+    padding: .5em;
+}
+
+.task .task-actions {
+    display: flex;
+    align-content: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+    gap: .5em;
+}
+
+.btn {
+    padding: .4em .6em;
+    outline: none;
+    border: none;
+    border-radius: .3em;
+    transition: opacity 150ms, box-shadow 150ms, transform 150ms;
+    user-select: none;
+}
+
+.btn:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 4px gray;
+    transform: scale(1.05);
+}
+
+.btn.secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn.primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+
+.link-to-parent {
+    text-decoration: none;
+    color: rgb(0, 106, 235);
+    opacity: .8;
+    transition: opacity 250ms;
+    text-overflow: ellipsis;
+    max-width: 10em;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.right {
+    float: right;
+}
+
+.link-to-parent:hover {
+    text-decoration: underline;
+    opacity: 1;
+}
+
+label {
+    cursor: pointer;
+}
+
+input[type=checkbox] {
+    transform: scale(1.4);
+    margin-right: .6em;
+}
+
+/* tab */
+.tab-container {
+    /*border: 1px solid red;*/
+}
+
+.tab-bar {
+    display: flex;
+}
+
+.tab-button {
+    padding: .5em 1em;
+    border: 1px solid white;
+    border-right: 1px solid white;
+    border-top-left-radius: .2em;
+    border-top-right-radius: .2em;
+    cursor: pointer;
+    user-select: none;
+    background: var(--primary-color);
+    color: white;
+    transition: background 250ms, opacity 250ms;
+}
+
+.tab-button:hover[data-active="false"] {
+    opacity: .8;
+}
+
+.tab-button[data-active="true"] {
+    background: white;
+    color: black;
+}
+
+.tab-button[data-active="true"] {
+    border: 1px solid var(--border-color);
+    border-bottom: 1px solid white;
+}
+
+.tab-content {
+    margin-top: -1px;
+    border: 1px solid var(--border-color);
+    padding: .2em 1.5em 2em 1.5em;
+}
+
+
+.tree-layout {
+    display: flex;
+}
+
+.tree-container {
+    border: 1px solid gray;
+    flex: 0 0 40%;
+    overflow: auto;
+}
+
+.task-node > .task-tree {
+    padding-left: 1.5em;
+}
+
+.task-node {
+    position: relative;
+}
+
+details {
+    z-index: 1;
+    background: white;
+}
+
+.task-node summary {
+    cursor: pointer;
+    user-select: none;
+    padding: .2em 1em;
+}
+
+.task-node summary[data-selected="true"] {
+    background: var(--primary-color);
+    color: white;
+}
+
+.task-node summary[data-selected="false"]:hover {
+    background: var(--primary-color);
+    color: white;
+    opacity: .8;
+}
+
+.task-node summary[data-completed="true"]:after {
+    content: "\02713";
+    color: lightseagreen;
+    float: right;
+    font-weight: bolder;
+    font-size: 1.2em;
+}
+
+
+/*
+    tree
+*/
+.tree-form {
+    flex: 1 0 auto;
+    padding: 1em;
+}
+
+.tree-form summary {
+    pointer-events: none;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.subtask-counter {
+    color: #777;
+}
+
+.task-node summary[data-selected="true"] .subtask-counter,
+.task-node summary:hover .subtask-counter {
+    color: #eee;
+}

@@ -7,3 +7,4 @@ import './index.css';
 module.hot && module.hot.accept(() => location.reload());
 
 render(<App/>, document.getElementById('root'));
+export {TasksApi} from './components/todo/api';

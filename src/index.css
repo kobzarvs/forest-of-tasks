@@ -1,3 +1,9 @@
+:root {
+    --primary-color: #006aeb;
+    --secondary-color: #f13d41;
+    --border-color: gray;
+}
+
 html {
     font-family: sans-serif;
     font-size: 16px;
