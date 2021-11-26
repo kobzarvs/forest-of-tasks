@@ -1,7 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-.App {
+html {
+    font-family: sans-serif;
+    font-size: 16px;
 }
