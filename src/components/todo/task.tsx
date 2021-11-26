@@ -15,7 +15,7 @@ export const Task = memo(({task, parentTask, children, mode = TaskMode.list, num
   children?: React.ReactChildren | React.ReactNode;
 }) => {
   const [open, setOpen] = useState(mode === TaskMode.block);
-  const {remove, update} = useContext(TasksApi);
+  const {update} = useContext(TasksApi);
 
   if (!task) return null;
 
@@ -32,7 +32,7 @@ export const Task = memo(({task, parentTask, children, mode = TaskMode.list, num
       >
         {task.name ? <strong>{task.name}</strong> : '<Noname Task>'}
         {num !== undefined && <span className="right">[{num}]</span>}
-        {parentTask ? <LinkToTask className="right" task={parentTask} /> : null}
+        {parentTask ? <LinkToTask className="right" task={parentTask} label="Edit parent Task"/> : null}
       </summary>
 
       <div className="task-form" data-mode={mode}>
@@ -40,27 +40,23 @@ export const Task = memo(({task, parentTask, children, mode = TaskMode.list, num
           Name:
           <input type="text"
                  value={task.name}
-                 onChange={e => update(task, {name: e.target.value})}
+                 onChange={e => update(task.id, {name: e.target.value})}
           />
         </label>
         <label className="task-description-input">
           Description:
           <textarea rows={3}
                     value={task.description}
-                    onChange={e => update(task, {description: e.target.value})}
+                    onChange={e => update(task.id, {description: e.target.value})}
           />
         </label>
         <label className="task-completed-input">
           <input type="checkbox"
                  checked={task.completed}
-                 onChange={e => update(task, {completed: e.target.checked})}
+                 onChange={e => update(task.id, {completed: e.target.checked})}
           />
           is completed
         </label>
-
-        <button className="btn secondary" onClick={() => remove(task)}>
-          Delete task
-        </button>
       </div>
 
       {children}

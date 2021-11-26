@@ -17,9 +17,9 @@ export interface TodoItem extends TaskFields {
 export type ITodoListIndex = { [key: string]: TodoItem };
 
 export type API = {
-  remove: (task: TodoItem) => void;
-  update: (task: TodoItem, values: TaskFields) => void;
-  add: (parent: string | undefined) => void;
+  remove: (id: string | undefined) => void;
+  update: (id: string , values: TaskFields) => void;
+  add: (id: string | undefined) => void;
 };
 
 const defaultHandler = () => {

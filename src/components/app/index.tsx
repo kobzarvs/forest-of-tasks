@@ -15,11 +15,18 @@ export const App = () => {
   const [currentNode, setCurrentNode] = useState<TodoItem | undefined>(undefined);
 
 
-  const remove = useCallback((task: TodoItem) => {
+  const remove = useCallback((taskId: string | undefined) => {
+    console.log(taskId);
+    if (!taskId) {
+      setTasks({});
+      setCurrentNode(undefined);
+      save({});
+      return;
+    }
     const newTasks = {...tasks};
-    delete newTasks[task.id];
+    delete newTasks[taskId];
     setTasks(newTasks);
-    setCurrentNode(newTasks[task.id]);
+    setCurrentNode(newTasks[taskId]);
     save(newTasks);
   }, [tasks, setTasks]);
 
@@ -34,16 +41,16 @@ export const App = () => {
     save(newTasks);
   }, [setTasks, tasks]);
 
-  const update = useCallback((task: TodoItem, values: TaskFields) => {
+  const update = useCallback((id: string, values: TaskFields) => {
     const newTasks = {
       ...tasks,
-      [task.id]: {
-        ...task,
+      [id]: {
+        ...tasks[id],
         ...values,
       },
     };
     setTasks(newTasks);
-    setCurrentNode(newTasks[task.id]);
+    setCurrentNode(newTasks[id]);
     save(newTasks);
   }, [tasks, setTasks]);
 
