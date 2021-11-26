@@ -79,7 +79,7 @@ export const App = () => {
                 />
               </div>
               <div className="tree-form">
-                <Task key={currentNode?.id} task={currentNode} mode={TaskMode.block}/>
+                <Task task={currentNode} mode={TaskMode.block}/>
               </div>
             </div>
           </Tab>
