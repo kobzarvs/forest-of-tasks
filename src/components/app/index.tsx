@@ -52,7 +52,6 @@ export const App = () => {
   }, []);
 
   const handleChangeTreeNode = (task:TodoItem) => {
-    console.log(task);
     setCurrentNode(task);
   }
 
